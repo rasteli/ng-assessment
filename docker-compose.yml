@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+      
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./backend:/usr/server
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@172.18.0.2:5432/postgres?schema=public
+      - JWT_SECRET_KEY=9fcfcfe1099d4bf84145b721ae5f530d
+
+  client:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web:/usr/client
+    depends_on:
+      - server
+    environment:
+      - VITE_BASE_URL=http://172.18.0.3:3333
