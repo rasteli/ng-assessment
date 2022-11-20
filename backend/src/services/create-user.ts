@@ -28,7 +28,7 @@ export class CreateUser {
     let user = await this.userRepository.findByUsername(username)
 
     if (user) {
-      throw new Error("Username already in use")
+      throw new Error("Nome de usuário já existe")
     }
 
     user = new User(username, password)

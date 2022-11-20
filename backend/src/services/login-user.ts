@@ -28,11 +28,11 @@ export class LoginUser {
     const user = await this.userRepository.findByUsername(username)
 
     if (!user) {
-      throw new Error("User not found")
+      throw new Error("Usuário não encontrado")
     }
 
     if (!compareHash(password, user.password)) {
-      throw new Error("Invalid password")
+      throw new Error("Senha incorreta")
     }
 
     const token = signToken({ user }, user.username)

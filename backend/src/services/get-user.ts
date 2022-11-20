@@ -14,7 +14,7 @@ export class GetUser {
     const user = await this.userRepository.findByUsername(username)
 
     if (!user) {
-      throw new Error("User not found")
+      throw new Error("Usuário não encontrado")
     }
 
     return user

@@ -27,11 +27,11 @@ export class CreateTransaction {
     const creditedAccount = await this.accountRepository.findByUsername(recipient)
 
     if (!debitedAccount || !creditedAccount) {
-      throw new Error("Account not found")
+      throw new Error("Conta não encontrada")
     }
 
     if (debitedAccount.balance < value) {
-      throw new Error("Insufficient funds")
+      throw new Error("Saldo insuficiente")
     }
 
     const transaction = new Transaction(debitedAccount, creditedAccount, value)
