@@ -13,7 +13,7 @@ export function SidePanel() {
   const { transactions } = useTransaction()
 
   const balanceInCents = user?.account.balance
-  const balance = balanceInCents && formatBalanceToBRL(balanceInCents)
+  const balance = formatBalanceToBRL(balanceInCents || 0)
 
   const lastCashIn = transactions.find(
     transaction => transaction.creditedAccount.id === user?.account.id
@@ -27,9 +27,9 @@ export function SidePanel() {
 
   return (
     <aside className="mx-10 relative">
-      <div className="border-r-[1px] border-gray-400 h-full absolute top-0 -right-10" />
+      <div className="lg:border-r-[1px] lg:border-gray-400 lg:h-full lg:absolute top-0 -right-10" />
 
-      <div className="bg-cyan-500 p-3 rounded flex flex-col gap-10">
+      <div className="bg-cyan-500 p-3 rounded flex flex-col gap-10 min-w-[240px]">
         <Heading className="text-gray-700">Saldo atual</Heading>
         <Text className="text-3xl font-bold text-gray-900">{balance}</Text>
       </div>
@@ -39,7 +39,7 @@ export function SidePanel() {
       <div>
         <Heading>Últimas transações</Heading>
 
-        <div className="flex gap-16 mt-10">
+        <div className="flex gap-10 mt-10 max-xl:flex-col">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center rounded bg-gray-100 w-10 h-10">
               <Wallet size={32} />

@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { Transaction } from "./transaction"
 import { Account } from "./account"
-import { User } from "./user"
 
 describe("Create transaction", () => {
   it("should create a transaction and modify the balance of the accounts", () => {
@@ -9,10 +8,8 @@ describe("Create transaction", () => {
     const originalDebitedAccountBalance = 100
     const originalCreditedAccountBalance = 300
 
-    const user = new User("johndoe", "Password123")
-
-    const debitedAccount = new Account(user, originalDebitedAccountBalance)
-    const creditedAccount = new Account(user, originalCreditedAccountBalance)
+    const debitedAccount = new Account(originalDebitedAccountBalance)
+    const creditedAccount = new Account(originalCreditedAccountBalance)
 
     const transaction = new Transaction(debitedAccount, creditedAccount, value)
 

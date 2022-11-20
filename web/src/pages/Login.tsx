@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { User, Lock } from "phosphor-react"
+import { ToastContainer, toast } from "react-toastify"
 
 import { Heading } from "../components/Heading"
 import { Logo } from "../components/Logo"
@@ -20,7 +21,13 @@ export function Login() {
     const username = formData.get("username") as string
     const password = formData.get("password") as string
 
-    await login(username, password)
+    try {
+      await login(username, password)
+    } catch (error: any) {
+      toast.error(error.response.data.error, {
+        toastId: "login-error"
+      })
+    }
   }
 
   return (
@@ -79,6 +86,8 @@ export function Login() {
           </Link>
         </Text>
       </footer>
+
+      <ToastContainer draggable position="bottom-center" />
     </div>
   )
 }

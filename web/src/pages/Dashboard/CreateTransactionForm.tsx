@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ToastContainer, toast } from "react-toastify"
 
 import { Text } from "../../components/Text"
 import { Button } from "../../components/Button"
@@ -21,11 +22,17 @@ export function CreateTransactionForm({ balanceInCents }: CreateTransactionForm)
   async function handleCreateTransaction(e: React.FormEvent) {
     e.preventDefault()
 
-    const valueInCents = Number(value) * 100
-    await createTransaction(recipient, valueInCents)
+    try {
+      const valueInCents = Number(value) * 100
+      await createTransaction(recipient, valueInCents)
 
-    setValue("")
-    setRecipient("")
+      setValue("")
+      setRecipient("")
+    } catch (error: any) {
+      toast.error(error.response.data.error, {
+        toastId: "create-transaction-error"
+      })
+    }
   }
 
   return (
@@ -62,6 +69,8 @@ export function CreateTransactionForm({ balanceInCents }: CreateTransactionForm)
       <Button type="submit" className="mt-4" disabled={isRecipientEmpty || isValueEmpty}>
         Transferir
       </Button>
+
+      <ToastContainer draggable position="bottom-left" />
     </form>
   )
 }

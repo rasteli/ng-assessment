@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { User, Lock } from "phosphor-react"
+import { ToastContainer, toast } from "react-toastify"
 
 import { Heading } from "../components/Heading"
 import { Logo } from "../components/Logo"
@@ -21,9 +22,19 @@ export function SignUp() {
     const password = formData.get("password") as string
     const retypePassword = formData.get("retype-password") as string
 
-    if (password !== retypePassword) return
+    if (password !== retypePassword) {
+      return toast.error("As senhas não coincidem", {
+        toastId: "signup-error"
+      })
+    }
 
-    await signUp(username, password)
+    try {
+      await signUp(username, password)
+    } catch (error: any) {
+      toast.error(error.response.data.error, {
+        toastId: "signup-error"
+      })
+    }
   }
 
   return (
@@ -97,6 +108,8 @@ export function SignUp() {
           </Link>
         </Text>
       </footer>
+
+      <ToastContainer draggable position="bottom-center" />
     </div>
   )
 }

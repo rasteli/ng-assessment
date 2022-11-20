@@ -15,19 +15,15 @@ describe("Create user", () => {
 
   it("should not create a user whose props doesn't meet the requirements", () => {
     expect(() => new User("jo", "Password123")).toThrowError(
-      "Username must be at least 3 characters long"
+      "Nome de usuário deve ter pelo menos 3 caracteres"
     )
 
-    expect(() => new User("johndoe", "Password")).toThrowError(
-      "Password must contain at least 1 number"
-    )
+    expect(() => new User("johndoe", "Password")).toThrowError("Senha deve ter pelo menos 1 número")
 
-    expect(() => new User("johndoe", "123")).toThrowError(
-      "Password must be at least 8 characters long"
-    )
+    expect(() => new User("johndoe", "123")).toThrowError("Senha deve ter pelo menos 8 caracteres")
 
     expect(() => new User("johndoe", "password123")).toThrowError(
-      "Password must contain at least 1 uppercase letter"
+      "Senha deve ter pelo menos 1 letra maiúscula"
     )
   })
 })

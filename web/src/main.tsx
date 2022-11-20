@@ -6,6 +6,7 @@ import { AuthProvider } from "./contexts/AuthContext"
 import { TransactionProvider } from "./contexts/TransactionContext"
 
 import "./styles/global.css"
+import "react-toastify/dist/ReactToastify.css"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

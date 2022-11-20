@@ -35,6 +35,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: "Inter, sans-serif"
+      },
+      screens: {
+        lg: "1140px"
       }
     }
   },

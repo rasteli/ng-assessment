@@ -17,8 +17,8 @@ describe("Create transaction", () => {
 
     const createAccount = new CreateAccount(accountRepository)
 
-    await createAccount.execute({ user: sender, balance: 100 })
-    await createAccount.execute({ user: recipient, balance: 100 })
+    await createAccount.execute({ balance: 100 })
+    await createAccount.execute({ balance: 100 })
 
     const sut = new CreateTransaction(transactionRepository, accountRepository)
 

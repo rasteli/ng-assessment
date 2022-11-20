@@ -1,7 +1,7 @@
 import { useState } from "react"
 import clsx from "clsx"
-import * as Select from "@radix-ui/react-select"
 import { CaretDown } from "phosphor-react"
+import * as Select from "@radix-ui/react-select"
 
 import { Text } from "../../components/Text"
 import { Heading } from "../../components/Heading"
@@ -40,7 +40,7 @@ export function TransactionTable() {
   }
 
   return (
-    <main className="flex flex-col mx-[5.75rem]">
+    <main className="flex flex-col md:mx-[5.75rem] max-lg:mx-10 max-lg:mt-10">
       <div className="flex items-center">
         <Heading className="flex-1">Todas as transações</Heading>
 
@@ -52,7 +52,7 @@ export function TransactionTable() {
             </Select.Icon>
           </Select.Trigger>
           <Select.Portal>
-            <Select.Content className="overflow-hidden bg-gray-700 rounded text-gray-100 shadow-md">
+            <Select.Content className="z-20 overflow-hidden bg-gray-700 rounded text-gray-100 shadow-md">
               <Select.Viewport className="p-2">
                 <Select.Group>
                   <SelectItem value="all">Todas</SelectItem>
