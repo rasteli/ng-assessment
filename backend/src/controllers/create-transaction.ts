@@ -10,7 +10,7 @@ export class CreateTransactionController {
     const { value, recipient } = request.body
 
     if (username === recipient) {
-      return response.status(403).json({ error: "You cannot transfer to yourself" })
+      return response.status(403).json({ error: "Você não pode transferir para si mesmo" })
     }
 
     const accountRepository = new DatabaseAccountRepository()
