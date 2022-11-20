@@ -23,6 +23,14 @@ export class CreateTransaction {
     recipient,
     value
   }: CreateTransactionRequest): Promise<CreateTransactionResponse> {
+    if (sender === recipient) {
+      throw new Error("Você não pode transferir para si mesmo")
+    }
+
+    if (value <= 0.01) {
+      throw new Error("O valor mínimo de transferência é de R$ 0,01")
+    }
+
     const debitedAccount = await this.accountRepository.findByUsername(sender)
     const creditedAccount = await this.accountRepository.findByUsername(recipient)
 
