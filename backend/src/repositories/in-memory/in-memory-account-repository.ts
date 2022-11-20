@@ -9,6 +9,6 @@ export class InMemoryAccountRepository implements AccountRepository {
   }
 
   async findByUsername(username: string): Promise<Account | undefined> {
-    return this.accounts.find(account => account.user.username === username)
+    return this.accounts.find(account => account.user?.username === username)
   }
 }

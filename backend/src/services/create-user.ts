@@ -38,11 +38,11 @@ export class CreateUser {
     const token = signToken({ user }, user.username)
 
     const createAccountService = new CreateAccount(this.accountRepository)
-    const account = await createAccountService.execute({ balance: 10000 }) // balance in cents
+    const account = await createAccountService.execute({ balance: 10000, user }) // balance in cents
 
     return {
       user: {
-        ...user,
+        username: user.username,
         account
       },
       token

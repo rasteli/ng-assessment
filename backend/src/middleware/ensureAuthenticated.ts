@@ -15,7 +15,7 @@ export function ensureAuthenticate(request: Request, response: Response, next: N
   const [, token] = authToken.split(" ") //comma ignores a value
 
   try {
-    const { sub } = verify(token, process.env.JWT_SECRET_KEY!) as Payload
+    const { sub } = verify(token, process.env.VITE_JWT_SECRET_KEY!) as Payload
 
     request.username = sub
 

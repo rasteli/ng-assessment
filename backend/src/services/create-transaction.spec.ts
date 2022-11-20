@@ -17,19 +17,19 @@ describe("Create transaction", () => {
 
     const createAccount = new CreateAccount(accountRepository)
 
-    await createAccount.execute({ balance: 100 })
-    await createAccount.execute({ balance: 100 })
+    await createAccount.execute({ balance: 10000, user: sender })
+    await createAccount.execute({ balance: 10000, user: recipient })
 
     const sut = new CreateTransaction(transactionRepository, accountRepository)
 
     const transaction = await sut.execute({
       sender: sender.username,
       recipient: recipient.username,
-      value: 50
+      value: 5000
     })
 
     expect(transaction).toBeInstanceOf(Transaction)
-    expect(transaction.debitedAccount.balance).toEqual(50)
-    expect(transaction.creditedAccount.balance).toEqual(150)
+    expect(transaction.debitedAccount.balance).toEqual(5000)
+    expect(transaction.creditedAccount.balance).toEqual(15000)
   })
 })

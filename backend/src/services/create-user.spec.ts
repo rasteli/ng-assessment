@@ -1,5 +1,4 @@
 import { describe, it, expect } from "vitest"
-import { User } from "../entities/user"
 import { CreateUser } from "./create-user"
 import { InMemoryUserRepository } from "../repositories/in-memory/in-memory-user-repository"
 import { InMemoryAccountRepository } from "../repositories/in-memory/in-memory-account-repository"
@@ -12,8 +11,8 @@ describe("Create user", () => {
     const sut = new CreateUser(userRepository, accountRepository)
     const response = await sut.execute({ username: "johndoe", password: "Password123" })
 
-    expect(response.user).toBeInstanceOf(User)
-    expect(response.account?.balance).toBe(100)
+    expect(response.user.username).toEqual("johndoe")
+    expect(response.user.account?.balance).toBe(10000)
   })
 
   it("should not create a user with the same username", async () => {
@@ -26,6 +25,6 @@ describe("Create user", () => {
 
     await sut.execute({ username, password })
 
-    expect(sut.execute({ username, password })).rejects.toThrowError("Username already in use")
+    expect(sut.execute({ username, password })).rejects.toThrowError("Nome de usuário já existe")
   })
 })
