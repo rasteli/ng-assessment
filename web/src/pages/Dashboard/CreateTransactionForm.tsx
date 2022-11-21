@@ -18,6 +18,7 @@ export function CreateTransactionForm({ balanceInCents }: CreateTransactionForm)
 
   const isValueEmpty = value.length === 0
   const isRecipientEmpty = recipient.length === 0
+  const isValueLessThanMinimal = Number(value) < 0.01
 
   async function handleCreateTransaction(e: React.FormEvent) {
     e.preventDefault()
@@ -66,7 +67,11 @@ export function CreateTransactionForm({ balanceInCents }: CreateTransactionForm)
         </TextInput.Root>
       </label>
 
-      <Button type="submit" className="mt-4" disabled={isRecipientEmpty || isValueEmpty}>
+      <Button
+        type="submit"
+        className="mt-4"
+        disabled={isRecipientEmpty || isValueEmpty || isValueLessThanMinimal}
+      >
         Transferir
       </Button>
 
